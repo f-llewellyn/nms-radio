@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <button onclick="test()">Play</button>
+    <audio controls>
+        <source src="http://localhost:5500/STREAM_NAME.m3u8">
+        <p>Fallback message</p>
+    </audio>
+    <script src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
+    <video id="videoElement"></video>
+    <script>
+        function test() {
+            alert(`Start`);
+        
+        if (flvjs.isSupported()) {
+            var videoElement = document.getElementById('videoElement');
+            var flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: 'http://localhost:8000/live/STREAM_NAME/index.m3u8'
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load();
+            flvPlayer.play();
+        }
+        }
+    </script>
+</body>
+</html>
